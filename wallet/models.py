@@ -54,6 +54,17 @@ class Transaction(models.Model):
     description =  models.CharField(max_length=200, verbose_name='توضیحات', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")    
     updated = models.DateTimeField(auto_now=True, verbose_name="تاریخ بروزرسانی")
+    
+    @property
+    def persian_type(self):
+        if self.type == "bank_deposit": return "واریز بانکی"
+        if self.type == "point_deposit": return "تبدیل امتیاز"
+
+    @property
+    def persian_status(self):
+        if self.status == "pending": return "در انتظار پرداخت"
+        if self.status == "cancel": return "لغو شده"
+        if self.status == "done": return "پرداخت شده"
 
     # def confirm(self):
     #     if self.status == "pending":

@@ -8,4 +8,5 @@ urlpatterns = [
     path('reminder/', include('reminder.urls')),
     path('state/', include('state.urls')),
     path('market/', include('market.urls')),
+    path('address/', include('address.urls')),
 ]

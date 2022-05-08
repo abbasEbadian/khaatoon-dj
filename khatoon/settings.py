@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'favorite',
     'reminder',
     'attribute',
+    'address',
     'wallet',
 
 

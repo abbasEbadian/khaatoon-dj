@@ -9,5 +9,12 @@ User = get_user_model()
 @api_view(['POST'])
 @authentication_classes([JWTAuthentication])
 # Create your views here.
-def get_deposit_url(request):
+def create_address(request):
+    return Response({})
+
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+# Create your views here.
+def edit(request):
+
     return Response({})

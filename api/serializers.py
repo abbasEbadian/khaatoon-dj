@@ -6,10 +6,33 @@ from favorite.models import Favorite
 from reminder.models import Reminder
 from market.models import Market, BusinessType
 from state.models import Province, City
+from address.models import Address
+from wallet.models import Wallet, Transaction
 from attribute.models import Attribute, AttributeValue, ProductAttribute
 
 
 
+class TransactionSerializer(serializers.ModelSerializer):
+    pstatus = serializers.CharField(max_length=200, source="persian_status")
+    ptype = serializers.CharField(max_length=200, source="persian_type")
+    class Meta:
+        model = Transaction
+        exclude = ('wallet_id', )
+        depth=2
+
+class WalletSerializer(serializers.ModelSerializer):
+    transaction_set = TransactionSerializer(many=True, read_only=True)
+    class Meta:
+        model = Wallet
+        exclude = ("user_id", )
+        depth=2
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        exclude = ("user_id", )
+        depth=2
+        
 class BusinessTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessType
@@ -74,7 +97,7 @@ class ReminderSerializer(serializers.ModelSerializer):
 class MarketSerializer(serializers.ModelSerializer):
     # favorite_set = FavoriteSerializer( many=True, read_only=True)
     # reminder_set = ReminderSerializer( many=True, read_only=True)
-
+    
     class Meta:
         model = Market
         fields = '__all__'
@@ -84,7 +107,9 @@ class MarketSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     favorite_set = FavoriteSerializer( many=True, read_only=True)
     reminder_set = ReminderSerializer( many=True, read_only=True)
+    address_set = AddressSerializer( many=True, read_only=True)
     market = MarketSerializer(many=False, read_only=True)
+    wallet = WalletSerializer(many=False, read_only=True, source="wallet_id")
     class Meta:
         model = CustomUser
         exclude = ('id', 'password', 'user_permissions', 'groups')
