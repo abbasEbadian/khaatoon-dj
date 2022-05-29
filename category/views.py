@@ -9,10 +9,12 @@ User = get_user_model()
 @api_view(["GET"])
 @authentication_classes([])
 def get_all_categories(request):
-    cats = Category.objects.all()
-    cats = CategorySerializer(cats, many=True)
+    cats = Category.objects.filter(parent_id__isnull=True)
+    cats2 = Category.objects.all()
+    cats = CategorySerializer(cats, many=True).data
+    cats2 = CategorySerializer(cats2, many=True).data
 
-    return Response (cats.data)
+    return Response ({"categories": cats, "flat_categories": cats2})
 
 
 

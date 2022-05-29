@@ -18,4 +18,6 @@ class AttributeValueAdmin(admin.ModelAdmin):
 class ProductAttributeValueAdmin(admin.ModelAdmin):
     
     date_hierarchy = 'created'
-    list_display = ('id', 'product_id' , 'attribute_id', 'value_id' )
+    list_display = ('id', 'product_id', 'product_template_id' , 'attribute_id', 'value_id' )
+
+    

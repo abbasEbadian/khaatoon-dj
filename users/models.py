@@ -1,8 +1,9 @@
+import json
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from state.models import Province
-from django.conf import settings
 import uuid
+from django.db.models import Q
 
 auth_status = [
     ('unauthorized', 'احراز نشده'),
@@ -55,3 +56,15 @@ class CustomUser(AbstractUser):
     # def image_tag(self):
     #     if self.birth_card_image != '':
     #         return mark_safe('<img src="%s%s" width="150" height="150" />' % (f'{settings.MEDIA_URL}images/birth_cards', self.birth_card_image))
+
+    def get_orders(self):
+        # return self.order_set.filter(~Q(status= "draft")).all()
+        return self.order_set.filter(original_order_id__isnull=True).exclude(status= "draft")
+
+    def get_unread_messages_count(self):
+        c = 0
+        for chat in self.chat_set.iterator():
+            for message in chat.message_set.iterator():
+                if message.sender == "market" and  not message.seen:
+                    c += 1
+        return c 

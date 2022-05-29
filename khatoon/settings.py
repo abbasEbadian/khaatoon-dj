@@ -61,12 +61,17 @@ INSTALLED_APPS = [
     'attribute',
     'address',
     'wallet',
+    'message',
+    'ticket',
+    'order',
+    'config',
 
 
     'rest_framework',
     "corsheaders",
     "django_summernote",
     'colorfield',
+    'solo',
     
 
 

@@ -9,4 +9,9 @@ urlpatterns = [
     path('state/', include('state.urls')),
     path('market/', include('market.urls')),
     path('address/', include('address.urls')),
+    path('message/', include('message.urls')),
+    path('attribute/', include('attribute.urls')),
+    path('ticket/', include('ticket.urls')),
+    path('order/', include('order.urls')),
+    path('config/', include('config.urls')),
 ]
