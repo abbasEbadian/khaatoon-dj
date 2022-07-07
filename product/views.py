@@ -2,8 +2,9 @@ from django.shortcuts import render
 
 from attribute.models import Attribute, AttributeValue, ProductAttribute
 from .models import Product
+from market.models import Market
 from category.models import Category
-from api.serializers import ProductSerializer
+from api.serializers import MarketSerializer, ProductSerializer
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -64,7 +65,8 @@ def get_index_products(request):
             "timerSliderProducts": ProductSerializer(products, many=True).data[:6],
             "newProducts": ProductSerializer(products, many=True).data[:12],
             "suggestSliderProducts": ProductSerializer(products, many=True).data[:10],
-            "magicSliderProducts": ProductSerializer(products, many=True).data[:6]
+            "magicSliderProducts": ProductSerializer(products, many=True).data[:6],
+            "markets": MarketSerializer(Market.objects.all(), many=True).data[:15],
         })
     except Exception as e:
         print(e)
@@ -93,7 +95,7 @@ def update_visibility(request):
         if product.market_id.user != request.user:
             return Response ({"error": 1, "message": "این محصول متعلق به شما نیست."})
 
-        if product.published != "accepted" and visible:
+        if product.status != "confirmed" and visible:
             return Response ({"error": 1, "message": "محصول هنوز تایید نشده است."})
         
         product.published = visible
