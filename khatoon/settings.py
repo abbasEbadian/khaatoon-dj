@@ -36,6 +36,7 @@ ALLOWED_HOSTS = [
     'giftstop.ir', 'giftstop.org', 'arsimodir.ir',
     '185.110.188.61', '185.110.188.184',
     'www.giftstop.ir', 'www.giftstop.org', 'www.arsimodir.ir','localhost',
+    '127.0.0.1'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
