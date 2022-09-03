@@ -1,3 +1,4 @@
+from re import T
 from django.db import models
 from state.models import City, Province
 from django.contrib.auth import get_user_model
@@ -66,6 +67,7 @@ STATUS_CHOICES = [
 ]
 class Market(models.Model):
     name = models.CharField(max_length=255, verbose_name="نام فروشگاه")
+    company_name = models.CharField(max_length=255, verbose_name="نام کامل شرکت", null=True, blank=True, help_text="در صورت حقوقی بودن")
     message = models.TextField(verbose_name="متن پیام غرفه دار",  null=True, blank=True)
     username = models.CharField(max_length=255, verbose_name="آدرس فروشگاه", unique=True, help_text="مسیر دسترسی به فروشگاه شما در مجموعه خاتون زیبا که آدرس مستقیم ورود به فروشگاه شما خواهد بود.", null=True, blank=True)
     about = models.TextField(verbose_name="درباره فروشگاه",  null=True, blank=True)
@@ -75,11 +77,13 @@ class Market(models.Model):
     website_address = models.CharField(max_length=255, verbose_name="آدرس وبسایت", blank=True, null=True)
     mobile = models.CharField(max_length=255, verbose_name="شماره همراه",  null=True, blank=True)
     phone = models.CharField(max_length=255, verbose_name="تلفن ثابت", null=True, blank=True)
-
+    second_phone = models.CharField(max_length=255, verbose_name="شماره اضطراری", null=True, blank=True)
+    type = models.CharField(max_length=10, choices=[("Hagigi", 'حقیقی') , ("Hogugi", "حقوقی")])
     shaba = models.CharField(max_length=255, verbose_name="شماره شبا", null=True, blank=True)
     card_number = models.CharField(max_length=16, verbose_name="شماره کارت", null=True, blank=True)
     national_code = models.CharField(max_length=10, verbose_name="کد ملی", null=True, blank=True)
-
+    register_code = models.CharField(max_length=10, verbose_name="شماره ثبت", null=True, blank=True)
+    financial_code = models.CharField(max_length=255, verbose_name='کد اقتصادی',  null=True, blank=True)
     bank = models.ForeignKey(Bank,  on_delete=models.CASCADE, verbose_name="بانک", null=True, blank=True)
     user = models.OneToOneField(User, verbose_name="کاربر", on_delete=models.CASCADE)
     business_type = models.ForeignKey(BusinessType, on_delete=models.SET_NULL, null=True, verbose_name="نوع کسب و کار", )

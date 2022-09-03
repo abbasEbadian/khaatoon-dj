@@ -65,8 +65,7 @@ INSTALLED_APPS = [
     'ticket',
     'order',
     'config',
-
-
+    'rest_framework_swagger',
     'rest_framework',
     "corsheaders",
     "django_summernote",
@@ -105,7 +104,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+             'libraries' : {
+                'staticfiles': 'django.templatetags.static', 
+            }
         },
+        
     },
 ]
 
@@ -134,6 +137,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
 
 # Password validation

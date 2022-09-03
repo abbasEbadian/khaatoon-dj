@@ -112,6 +112,11 @@ def update_market_detail(request):
         about  = request.data.get('about', 0)
         mobile  = request.data.get('mobile', 0)
         phone  = request.data.get('phone', 0)
+        company_name  = request.data.get('company_name', 0)
+        second_phone  = request.data.get('second_phone', 0)
+        register_code  = request.data.get('register_code', 0)
+        financial_code  = request.data.get('financial_code', 0)
+        _type  = request.data.get('type', 0)
         province  = request.data.get('province', 0)
         city  = request.data.get('city', 0)
         address  = request.data.get('address', 0)
@@ -138,6 +143,11 @@ def update_market_detail(request):
             "instagram_address": instagram_address,
             "website_address": website_address,
             "telegram_address": telegram_address,
+            "company_name": company_name,
+            "second_phone": second_phone,
+            "register_code": register_code,
+            "financial_code": financial_code,
+            "type": _type,
         }
         if not any([name, message, username, businesstype_id, about, mobile, phone]):
             return Response ({"error": 1, "message" : "اطلاعات ناقص"})
