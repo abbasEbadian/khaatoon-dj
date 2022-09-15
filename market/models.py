@@ -68,6 +68,7 @@ STATUS_CHOICES = [
 class Market(models.Model):
     name = models.CharField(max_length=255, verbose_name="نام فروشگاه")
     company_name = models.CharField(max_length=255, verbose_name="نام کامل شرکت", null=True, blank=True, help_text="در صورت حقوقی بودن")
+    marketer_name = models.CharField(max_length=255, verbose_name="نام غرفه‌دار", null=True, blank=True)
     message = models.TextField(verbose_name="متن پیام غرفه دار",  null=True, blank=True)
     username = models.CharField(max_length=255, verbose_name="آدرس فروشگاه", unique=True, help_text="مسیر دسترسی به فروشگاه شما در مجموعه خاتون زیبا که آدرس مستقیم ورود به فروشگاه شما خواهد بود.", null=True, blank=True)
     about = models.TextField(verbose_name="درباره فروشگاه",  null=True, blank=True)
