@@ -33,11 +33,11 @@ SECRET_KEY = 'django-insecure-2ua=(u0*h4_$i0u&f6lqs(o1ro7h89is0x_w_u5)*wp-r16um+
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'giftstop.ir', 'giftstop.org', 'arsimodir.ir',
-    '185.110.188.61', '185.110.188.184',
-    'www.giftstop.ir', 'www.giftstop.org', 'www.arsimodir.ir','localhost',
+    
+    'localhost',
     '127.0.0.1'
 ]
+TRSUTED_ORIGINS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 
 
